@@ -5,7 +5,7 @@ with open('readme.md', 'r') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="setuptools_git_ver",
+    name="setuptools-git-ver",
     version=version_from_git(),
     author="Camas",
     description="Automatically set package version using git tag/hash",
