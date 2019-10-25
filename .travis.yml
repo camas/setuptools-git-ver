@@ -7,7 +7,7 @@ deploy:
   provider: pypi
   user: "__token__"
   password:
-    secure: "todo"
+    secure: "1PSWTFOHXIUJwHUXGHvHtzxKbiztnn0b5YMcojPvimCkOWywZrHPf+/ThQQCd3GcVhXpzsfKvxH7bnMBtXv9l5aXo0ufXrJQbam4OR9/OjVL/Yl0K+skglipQsf71PkzbGHURjwjhY3ARYIiX3vsYg+b5ta9V12IA3F3crSgbB0MkREIHDEV4MLGosEpPb2xDHvzNuaUWRc9gZbfAA8cVhKQy/6093ctKN1rsKAnk6YM4yHW/jvh4Dt466TBnSMrGYskefGDnRYeiPgt+FJNmCQ9xYI2qXaxFg79iLD0l+Q6ecBcnLBpYbbdJyd5fSiAwQmX61p9Tb31pVsyIdN5+1/2vmf4lciH6xINUnLg1hvA4ZY3yWToZjNLubo7jURW/jrSd2XDJQWL92s7u25xnmgfIqjKcyz5lNUVoq6Ig1uo9O2Uf2DBHniGRuzoHUGnduGV5zAN+68jv2KATFqScGtPTumBTfDlANEo/JHKLvfy0EpIR5hxuvj1X6OAaOrVUyDxtxStuCCZlNw9OBzxSq7K6cVUDtHmEbd5RvzhE5tboWviR0qCKJrK+t64/xEzw2U1pnpGfQfF9vLqMwT75qu2sUgR0TbdPIcblbQJQTGqONX/fTltstSuXBitIgjl7hmiq6/dbSjFcxBsqEGXuKRU6Up743CkROILwFretJw="
   on:
     tags: true
   distributions: "sdist bdist_wheel"
