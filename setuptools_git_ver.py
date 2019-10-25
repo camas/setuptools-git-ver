@@ -1,7 +1,10 @@
 from typing import List
 import subprocess
+from setuptools.dist import Distribution
+from distutils.errors import DistutilsSetupError
+from collections.abc import Mapping
 
-DEFTAULT_TEMPLATE: str = "{tag}"
+DEFAULT_TEMPLATE: str = "{tag}"
 DEFAULT_DEV_TEMPLATE: str = "{tag}.dev{ccount}+git.{sha}"
 DEFAULT_DIRTY_TEMPLATE: str = "{tag}.dev{ccount}+git.{sha}.dirty"
 
@@ -12,7 +15,7 @@ def _exec(cmd: List[str]) -> List[str]:
     return [l.rstrip() for l in lines]
 
 
-def _get_tag():
+def _get_tag() -> str:
     tags = _exec(
         "git tag --sort=-taggerdate".split(' '))
     if len(tags) == 0 or len(tags[0]) == 0:
@@ -20,26 +23,52 @@ def _get_tag():
     return tags[0]
 
 
-def _get_sha(name):
+def _get_sha(name: str) -> str:
     sha = _exec([*f"git rev-list -n 1".split(' '), name])
     if len(sha) == 0 or len(sha[0]) == 0:
         return None
     return sha[0]
 
 
-def _is_dirty():
+def _is_dirty() -> bool:
     res = _exec("git status --short".split(' '))
     if len(res) == 0 or len(res[0]) == 0:
         return False
     return True
 
 
-def _count_since(name):
+def _count_since(name: str) -> int:
     res = _exec([*"git rev-list --count HEAD".split(' '), f"^{name}"])
     return int(res[0])
 
 
-def version_from_git(template: str = DEFTAULT_TEMPLATE,
+def parse_config(dist: Distribution, _, value):
+    if isinstance(value, bool):
+        if value:
+            version = version_from_git()
+            dist.metadata.version = version
+            return
+        else:
+            raise DistutilsSetupError("Can't be False")
+
+    if not isinstance(value, Mapping):
+        raise DistutilsSetupError("Config in the wrong format")
+
+    template = value['template'] if 'template' in value else DEFAULT_TEMPLATE
+    dev_template = value['dev_template'] if 'dev_template' in value \
+        else DEFAULT_DEV_TEMPLATE
+    dirty_template = value['dirty_template'] if 'dirty_template' in value \
+        else DEFAULT_DIRTY_TEMPLATE
+
+    version = version_from_git(
+        template=template,
+        dev_template=dev_template,
+        dirty_template=dirty_template,
+    )
+    dist.metadata.version = version
+
+
+def version_from_git(template: str = DEFAULT_TEMPLATE,
                      dev_template: str = DEFAULT_DEV_TEMPLATE,
                      dirty_template: str = DEFAULT_DIRTY_TEMPLATE,
                      ) -> None:

@@ -26,7 +26,7 @@ setuptools.setup(
     install_requires=['setuptools'],
     entry_points={
         'distutils.setup_keywords': [
-            'version_config = setuptools_git_ver:read_version_config'
+            'version_config = setuptools_git_ver:parse_config'
         ],
     },
 )
