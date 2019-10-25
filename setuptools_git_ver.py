@@ -44,19 +44,20 @@ def version_from_git(template: str = DEFTAULT_TEMPLATE,
                      dirty_template: str = DEFAULT_DIRTY_TEMPLATE,
                      ) -> None:
     tag = _get_tag()
-    dirty = _is_dirty()
     if tag is None:
         raise Exception("Couldn't find tag to use.")
 
+    dirty = _is_dirty()
     tag_sha = _get_sha(tag)
     head_sha = _get_sha('HEAD')
     ccount = _count_since(tag)
+    on_tag = head_sha == tag_sha
 
     if dirty:
         t = dirty_template
-    elif head_sha != tag_sha:
+    elif not on_tag:
         t = dev_template
     else:
         t = template
 
-    return t.format(sha=tag_sha[:8], tag=tag, ccount=ccount)
+    return t.format(sha=head_sha[:8], tag=tag, ccount=ccount)
