@@ -17,7 +17,7 @@ def _exec(cmd: List[str]) -> List[str]:
 
 def _get_tag() -> str:
     tags = _exec(
-        "git tag --sort=taggerdate".split(' '))
+        "git tag --sort=-version:refname --merged".split(' '))
     if len(tags) == 0 or len(tags[0]) == 0:
         return None
     return tags[0]
