@@ -1,0 +1,13 @@
+language: python
+install:
+  - pip install flake8
+script: 
+  - flake8 --count
+deploy:
+  provider: pypi
+  user: "__token__"
+  password:
+    secure: "todo"
+  on:
+    tags: true
+  distributions: "sdist bdist_wheel"

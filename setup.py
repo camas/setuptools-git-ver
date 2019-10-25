@@ -8,6 +8,7 @@ setuptools.setup(
     name="setuptools-git-ver",
     version=version_from_git(),
     author="Camas",
+    author_email="camas@hotmail.co.uk"
     description="Automatically set package version using git tag/hash",
     long_description=long_description,
     long_description_content_type="text/markdown",
