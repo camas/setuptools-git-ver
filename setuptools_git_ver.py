@@ -3,6 +3,7 @@ import subprocess
 from setuptools.dist import Distribution
 from distutils.errors import DistutilsSetupError
 from collections.abc import Mapping
+import os.path
 
 DEFAULT_TEMPLATE: str = "{tag}"
 DEFAULT_DEV_TEMPLATE: str = "{tag}.dev{ccount}+git.{sha}"
@@ -72,6 +73,15 @@ def version_from_git(template: str = DEFAULT_TEMPLATE,
                      dev_template: str = DEFAULT_DEV_TEMPLATE,
                      dirty_template: str = DEFAULT_DIRTY_TEMPLATE,
                      ) -> None:
+
+    # Check if PKG-INFO exists and return value in that if it does
+    if os.path.exists('PKG-INFO'):
+        with open('PKG-INFO', 'r') as f:
+            lines = f.readlines()
+        for line in lines:
+            if line.startswith('Version:'):
+                return line[8:].strip()
+
     tag = _get_tag()
     if tag is None:
         raise Exception("Couldn't find tag to use.")
