@@ -1,5 +1,8 @@
 # setuptools-git-ver
 
+[![PyPI version](https://badge.fury.io/py/setuptools-git-ver.svg)](https://badge.fury.io/py/setuptools-git-ver)
+[![Build Status](https://travis-ci.org/camas/setuptools-git-ver.svg?branch=master)](https://travis-ci.org/camas/setuptools-git-ver)
+
 Automatically set package version using git tag/hash
 
 ## Install
