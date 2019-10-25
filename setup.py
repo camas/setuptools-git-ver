@@ -22,7 +22,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.8',
+    python_requires='>=3.7',
     py_modules=['setuptools_git_ver'],
     install_requires=['setuptools'],
     entry_points={
