@@ -46,3 +46,11 @@ setuptools.setup(
 - `dev_template`: used if no untracked files and latest commit isn't tagged
 
 - `dirty_template`: used if untracked files exist or uncommitted changes have been made
+
+### Format Options
+
+- `{tag}`: Latest tag in the repository
+
+- `{ccount}`: Number of commits since last tag
+
+- `{sha}`: First 8 characters of the sha hash of the latest commit
