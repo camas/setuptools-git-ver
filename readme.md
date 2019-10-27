@@ -5,9 +5,11 @@
 
 Automatically set package version using git tag/hash
 
-## Install
+## Installation
 
-Install using pip
+No need.
+
+Adding `setup_requires=['setuptools-git-ver']` somewhere in `setup.py` will automatically download the latest version from PyPi and save it in the `.eggs` folder when `setup.py` is run.
 
 ## Usage
 
